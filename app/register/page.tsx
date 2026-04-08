@@ -55,6 +55,7 @@ export default function RegisterPage() {
       })
 
       if (authError) throw authError
+      if (!authData?.user) throw new Error('Failed to create user account')
 
       // Step 2: Create school record
       const { data: schoolData, error: schoolError } = await supabase
@@ -98,9 +99,9 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-emerald-50">
-      <div className="w-full max-w-2xl bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-emerald-900 mb-2 text-center">
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-24 bg-emerald-50">
+      <div className="w-full max-w-2xl bg-white p-6 md:p-8 rounded-lg shadow-lg">
+        <h1 className="text-2xl md:text-3xl font-bold text-emerald-900 mb-2 text-center">
           Register Your School
         </h1>
         <p className="text-gray-600 text-center mb-6">
@@ -148,7 +149,7 @@ export default function RegisterPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Subdomain *
                 </label>
-                <div className="flex">
+                <div className="flex flex-col sm:flex-row">
                   <input
                     type="text"
                     name="subdomain"
@@ -158,7 +159,7 @@ export default function RegisterPage() {
                     placeholder="greensprings"
                     required
                   />
-                  <span className="px-4 py-2 bg-gray-100 border border-l-0 border-gray-300 rounded-r-lg text-gray-600">
+                  <span className="px-4 py-2 bg-gray-100 border border-t sm:border-t-0 border-l-0 border-gray-300 rounded-r-lg text-gray-600 text-sm sm:text-base">
                     .wisteria.ng
                   </span>
                 </div>
@@ -264,7 +265,7 @@ export default function RegisterPage() {
                 <p><strong>Admin:</strong> {formData.fullName}</p>
               </div>
               <p className="text-xs text-gray-500 mt-4">
-                ️ Your school will be in "pending" status until approved by super admin.
+                ⚠️ Your school will be in "pending" status until approved by super admin.
               </p>
             </div>
           )}
