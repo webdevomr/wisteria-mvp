@@ -13,6 +13,13 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Validation: Ensure fields are not empty
+    if (!email || !password) {
+      setError('Please enter both email and password')
+      return
+    }
+    
     setLoading(true)
     setError('')
 
@@ -31,6 +38,12 @@ export default function LoginPage() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (!email || !password) {
+      setError('Please enter both email and password')
+      return
+    }
+    
     setLoading(true)
     setError('')
 
@@ -49,9 +62,9 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-emerald-50">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-emerald-900 mb-6 text-center">
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-24 bg-emerald-50">
+      <div className="w-full max-w-md bg-white p-6 md:p-8 rounded-lg shadow-lg">
+        <h1 className="text-2xl md:text-3xl font-bold text-emerald-900 mb-6 text-center">
           Wisteria Login
         </h1>
 
@@ -102,7 +115,8 @@ export default function LoginPage() {
         <div className="mt-4 text-center">
           <button
             onClick={handleSignUp}
-            className="text-sm text-emerald-600 hover:underline"
+            disabled={loading}
+            className="text-sm text-emerald-600 hover:underline disabled:opacity-50"
           >
             No account? Sign up
           </button>
