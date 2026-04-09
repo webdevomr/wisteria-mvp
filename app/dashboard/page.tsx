@@ -1,21 +1,25 @@
+import Link from 'next/link'
+
 export default function DashboardPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-emerald-50">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-emerald-900 mb-4">
-          Welcome to Wisteria
-        </h1>
-        <p className="text-xl text-emerald-700 mb-8">
-          Admin Dashboard (Day 2)
-        </p>
-        <div className="bg-white p-6 rounded-lg shadow">
-          <p className="text-gray-600">
-            ✅ You are logged in!
-          </p>
-          <p className="text-gray-600 mt-2">
-            Next: Build school setup wizard
-          </p>
-        </div>
+    <main className="min-h-screen bg-gray-50 p-8">
+      <h1 className="text-3xl font-bold text-emerald-900 mb-8">School Dashboard</h1>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Link href="/dashboard/classes" className="bg-white p-6 rounded-lg shadow hover:shadow-md">
+          <h3 className="font-bold text-lg mb-2">Classes</h3>
+          <p className="text-gray-600">Manage classes and arms</p>
+        </Link>
+        
+        <Link href="/dashboard/students" className="bg-white p-6 rounded-lg shadow hover:shadow-md">
+          <h3 className="font-bold text-lg mb-2">Students</h3>
+          <p className="text-gray-600">Add and manage students</p>
+        </Link>
+        
+        <Link href="/setup" className="bg-white p-6 rounded-lg shadow hover:shadow-md">
+          <h3 className="font-bold text-lg mb-2">School Setup</h3>
+          <p className="text-gray-600">Complete your profile</p>
+        </Link>
       </div>
     </main>
   )
