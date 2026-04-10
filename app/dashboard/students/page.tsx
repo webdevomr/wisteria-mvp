@@ -38,11 +38,7 @@ export default function StudentsPage() {
     const phoneNormalized = normalizePhone(formData.parentPhone)
     const phoneEnc = encrypt(phoneNormalized)
     const phoneHash = hashPhone(phoneNormalized)
-    const { error } = await supabase.from('students').insert([{
-      school_id: userData.school_id, student_id: studentId, full_name: formData.fullName, gender: formData.gender,
-      date_of_birth_enc: dobEnc, parent_phone_enc: phoneEnc, parent_phone_hash: phoneHash,
-      class_id: formData.classId, status: 'active',
-    }])
+    const { error } = await supabase.from('students').insert([{ school_id: userData.school_id, student_id: studentId, full_name: formData.fullName, gender: formData.gender, date_of_birth_enc: dobEnc, parent_phone_enc: phoneEnc, parent_phone_hash: phoneHash, class_id: formData.classId, status: 'active' }])
     if (!error) { setShowModal(false); fetchData(); setFormData({ fullName: '', gender: 'Male', dob: '', parentPhone: '', classId: '' }); alert(`Student added! ID: ${studentId}`) }
   }
 
@@ -56,11 +52,7 @@ export default function StudentsPage() {
         <div className="bg-gray-50 p-8 rounded-lg text-center"><p className="text-gray-600">No students yet.</p></div>
       ) : (
         <div className="bg-white rounded-lg shadow overflow-hidden">
-          <table className="w-full"><thead className="bg-gray-50"><tr><th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Student ID</th><th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th><th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Class</th><th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th></tr></thead>
-            <tbody className="divide-y divide-gray-200">
-              {students.map((s) => (<tr key={s.id}><td className="px-6 py-4 text-sm font-mono text-emerald-700">{s.student_id}</td><td className="px-6 py-4 text-sm">{s.full_name}</td><td className="px-6 py-4 text-sm">{s.class_id ? 'Assigned' : 'Unassigned'}</td><td className="px-6 py-4"><span className="px-2 py-1 text-xs rounded-full bg-emerald-100 text-emerald-800">{s.status}</span></td></tr>))}
-            </tbody>
-          </table>
+          <table className="w-full"><thead className="bg-gray-50"><tr><th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Student ID</th><th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th><th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Class</th><th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th></tr></thead><tbody className="divide-y divide-gray-200">{students.map((s) => (<tr key={s.id}><td className="px-6 py-4 text-sm font-mono text-emerald-700">{s.student_id}</td><td className="px-6 py-4 text-sm">{s.full_name}</td><td className="px-6 py-4 text-sm">{s.class_id ? 'Assigned' : 'Unassigned'}</td><td className="px-6 py-4"><span className="px-2 py-1 text-xs rounded-full bg-emerald-100 text-emerald-800">{s.status}</span></td></tr>))}</tbody></table>
         </div>
       )}
       {showModal && (
